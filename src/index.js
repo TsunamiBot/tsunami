@@ -12,7 +12,7 @@ const client = new Client({
 
 // Tells if the bot is active.
 client.on('ready', async () => {
-  console.log('Peta...The horse is here...');
+  console.log('I am the storm that is approaching...');
 
   //Gets all user information.
   const guild = client.guilds.cache.get(guildId);
