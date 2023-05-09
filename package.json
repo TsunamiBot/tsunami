@@ -1,5 +1,12 @@
 {
+  "scripts": {
+    "build": "webpack"
+  },
   "dependencies": {
     "discord.js": "^14.11.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.82.0",
+    "webpack-cli": "^5.1.1"
   }
 }
