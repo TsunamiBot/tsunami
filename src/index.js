@@ -1,3 +1,5 @@
+// Main logic for the bot.
+
 const { Client, GatewayIntentBits, InteractionCollector } = require('discord.js');
 const { token, guildId } = require('./config.json');
 const fs = require('fs');
