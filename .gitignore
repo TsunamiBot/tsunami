@@ -1,2 +1,5 @@
 # Node modules
 node_modules/
+
+# Ignore the config file I suppose.
+config.json
