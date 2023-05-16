@@ -21,5 +21,12 @@ client.on('ready', async () => {
   const members = await guild.members.fetch();
 });
 
+// Checks for commands and will only fire if it is a valid command.
+client.on('interactionCreate', (interation) => {
+  if (interation.commandName === 'ping') { 
+    interation.reply(`pong!`);
+  }
+});
+
 // Logins in the bot.
 client.login(token);

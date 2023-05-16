@@ -3,6 +3,10 @@ const { clientId, guildId, token } = require('./config.json');
 
 // List of commands.
 const commands = [
+    {
+        name: 'ping',
+        description: 'Replies back with a pong.'
+    }
     // {
     //     name: 'beg',
     //     description: 'Begs for coins. Will only work if the user is out of coins.'
