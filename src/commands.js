@@ -81,7 +81,7 @@ const rest = new REST({ version: '10' }).setToken(token);
             }
         )
 
-        console.log("Commands have been registered successfully!");
+        console.log("Commands have been registered successfully!\n\n");
     } catch (error) {
         console.log(error);
     }
