@@ -3,18 +3,11 @@
 const { Client, GatewayIntentBits, InteractionCollector } = require('discord.js');
 const { token, guildId } = require('./config.json');
 const fs = require('fs');
-const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMembers,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.GuildMessageReactions,
-  ],
-});
+const client = new Client({ intents: 24065 });
 
 // Tells if the bot is active.
 client.on('ready', async () => {
-  console.log('I am the storm that is approaching...');
+  console.log('I am the storm that is approaching...\n');
 
   //Gets all user information.
   const guild = client.guilds.cache.get(guildId);
