@@ -4,6 +4,7 @@ const path = require('node:path');
 const { Client, Collection, Events } = require('discord.js');
 const { token } = require('./config.json');
 const Sequelize = require('sequelize');
+const { users } = require('./models.js');
 
 const client = new Client({ intents: 24065 });
 
@@ -14,6 +15,10 @@ const sequelize = new Sequelize('database', 'user', 'password', {
 	// SQLite only
 	storage: 'database.sqlite',
 });
+
+const models = {
+	users: sequelize.define('users', users),
+};
 
 client.commands = new Collection();
 
@@ -56,7 +61,8 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 
 	try {
-		await command.execute(interaction);
+		// If a command needs the database, make sure you put in the models parameter inside of the execute function of that command.
+		await command.execute(interaction, models);
 	} catch (error) {
 		console.error(error);
 		if (interaction.replied || interaction.deferred) {
