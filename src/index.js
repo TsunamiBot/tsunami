@@ -1,10 +1,19 @@
 // Main logic for the bot.
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection } = require('discord.js');
+const { Client, Collection, Events } = require('discord.js');
 const { token } = require('./config.json');
+const Sequelize = require('sequelize');
 
 const client = new Client({ intents: 24065 });
+
+const sequelize = new Sequelize('database', 'user', 'password', {
+	host: 'localhost',
+	dialect: 'sqlite',
+	logging: false,
+	// SQLite only
+	storage: 'database.sqlite',
+});
 
 client.commands = new Collection();
 
@@ -27,18 +36,32 @@ for (const folder of commandFolders) {
 }
 
 // Event logic for the index page.
-const eventsPath = path.join(__dirname, 'events');
-const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
+client.once(Events.ClientReady, c => {
+	console.log(`Ready! Logged in as ${c.user.tag}\n`);
+	console.log(`I am the storm that is approaching...\n`);
+});
 
-for (const file of eventFiles) {
-	const filePath = path.join(eventsPath, file);
-	const event = require(filePath);
-	if (event.once) {
-		client.once(event.name, (...args) => event.execute(...args));
-	} else {
-		client.on(event.name, (...args) => event.execute(...args));
+client.on(Events.InteractionCreate, async interaction => {
+	if (!interaction.isChatInputCommand()) return;
+
+	const command = interaction.client.commands.get(interaction.commandName);
+
+	if (!command) {
+		console.error(`No command matching ${interaction.commandName} was found.`);
+		return;
 	}
-}
+
+	try {
+		await command.execute(interaction);
+	} catch (error) {
+		console.error(error);
+		if (interaction.replied || interaction.deferred) {
+			await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
+		} else {
+			await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+		}
+	}
+});
 
 // Logins in the bot.
 client.login(token);
