@@ -18,9 +18,13 @@ const sequelize = new Sequelize('database', 'user', 'password', {
 client.commands = new Collection();
 
 // Slash command logic.
+//__dirname gets the directory the file is in, then appends the commands folder path
 const foldersPath = path.join(__dirname, 'commands');
+//Reads folder structure of the folder path
 const commandFolders = fs.readdirSync(foldersPath);
 
+//Loops through folders within the directory
+//Appends the client commands property with command names and filepath
 for (const folder of commandFolders) {
 	const commandsPath = path.join(foldersPath, folder);
 	const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
