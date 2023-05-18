@@ -6,5 +6,6 @@ const users = {
         unique: true,
     },
     username: Sequelize.STRING,
-    location: Sequelize.DOUBLE,
+    latitude: Sequelize.DOUBLE,
+    longitude: Sequelize.DOUBLE,
 }
