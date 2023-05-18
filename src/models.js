@@ -4,8 +4,18 @@ const users = {
     id: {
         type: Sequelize.INTEGER,
         unique: true,
+        primaryKey: true,
     },
-    username: Sequelize.STRING,
-    latitude: Sequelize.DOUBLE,
-    longitude: Sequelize.DOUBLE,
+    username: { 
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    latitude: { 
+        type: Sequelize.DOUBLE,
+        allowNull: false,
+    },
+    longitude:{ 
+        type:  Sequelize.DOUBLE,
+        allowNull: false,
+    },
 }

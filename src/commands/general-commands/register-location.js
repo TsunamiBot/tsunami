@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
-
+//const Sequelize = require('sequelize');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -19,9 +19,26 @@ module.exports = {
 	async execute(interaction, models) {
 		const latitude = interaction.options.getNumber('latitude');
 		const longitude = interaction.options.getNumber('longitude');
+		const userId = interaction.user.id;
+		const userName = interaction.user.username;
 
-		console.log(`Latitude: ${latitude} Longitude: ${longitude}`);
+		//Tries to add the user to the database
+		try {
+			const user = await models.users.create({
+				id: userId,
+				username: userName,
+				latitude: latitude,
+				longitude: longitude,
+			});
 
-		await interaction.reply('pong!');
+			return interaction.reply(`${userName} location registered!`);
+		}
+		catch (error) {
+			if (error.name === 'SequelizeUniqueConstraintError') {
+				return interaction.reply('You are already registered!');
+			}
+
+			return interaction.reply('Something went wrong with adding your location!!');
+		}
 	},
 };

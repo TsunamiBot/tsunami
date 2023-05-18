@@ -46,8 +46,14 @@ for (const folder of commandFolders) {
 
 // Event logic for the index page.
 client.once(Events.ClientReady, c => {
-	//models.users.sync() connects the database table
-	models.users.sync();
+	//Sync the db
+	sequelize.sync()
+		.then(() => {
+			console.log('Database synchronized');
+		})
+		.catch((error) => {
+			console.error('Failed to synchronize database:', error);
+		});
 	console.log(`Ready! Logged in as ${c.user.tag}\n`);
 	console.log(`I am the storm that is approaching...\n`);
 });
