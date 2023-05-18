@@ -62,8 +62,8 @@ for (const folder of commandFolders) {
 
 // Event logic for the index page.
 client.once(Events.ClientReady, c => {
-	//Sync the db
-	sequelize.sync()
+	//Sync the tables
+	Models.sync()
 		.then(() => {
 			console.log('Database synchronized');
 		})

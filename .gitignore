@@ -3,3 +3,6 @@ node_modules/
 
 # Ignore the config file I suppose.
 config.json
+
+# Ingores the database.
+database.sqlite

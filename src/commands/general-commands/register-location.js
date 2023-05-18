@@ -24,7 +24,7 @@ module.exports = {
 
 		//Tries to add the user to the database
 		try {
-			const user = await models.users.create({
+			const user = await models.create({
 				id: userId,
 				username: userName,
 				latitude: latitude,
