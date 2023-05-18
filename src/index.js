@@ -4,7 +4,6 @@ const path = require('node:path');
 const { Client, Collection, Events } = require('discord.js');
 const { token } = require('./config.json');
 const Sequelize = require('sequelize');
-const { users } = require('./models.js');
 
 const client = new Client({ intents: 24065 });
 
