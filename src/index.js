@@ -46,6 +46,8 @@ for (const folder of commandFolders) {
 
 // Event logic for the index page.
 client.once(Events.ClientReady, c => {
+	//models.users.sync() connects the database table
+	models.users.sync();
 	console.log(`Ready! Logged in as ${c.user.tag}\n`);
 	console.log(`I am the storm that is approaching...\n`);
 });
