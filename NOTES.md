@@ -3,3 +3,7 @@
 - Installing webpack to bundle modules  
 - Copying files from horse bot to integrate a frame of some kind for Tsunami  
 - Remember, you must run the command file in order to register the commands for the bot prior to use if any are needing to be modified.
+  
+# Database
+- register location works
+- view location doesnt :)

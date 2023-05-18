@@ -9,11 +9,10 @@ module.exports = {
 
 		try {
             const userId = interaction.user.id;
-            const location = await models.users.findOne({
-                attributes: ['latitude', 'longitude'],
+            const user = await models.users.findOne({
                 where: {id: userId},
             });
-            console.log('Location: ', location);
+            console.log('User: ', user);
 			return interaction.reply(`${interaction.user.username} is registered at location ${location}`);
 		}
 		catch (error) {
