@@ -38,6 +38,7 @@ module.exports = {
 				return interaction.reply('You are already registered!');
 			}
 
+			console.log(error);
 			return interaction.reply('Something went wrong with adding your location!!');
 		}
 	},

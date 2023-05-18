@@ -16,9 +16,25 @@ const sequelize = new Sequelize('database', 'user', 'password', {
 	storage: 'database.sqlite',
 });
 
-const models = {
-	users: sequelize.define('users', users),
-};
+const Models = sequelize.define('users', {
+	id: {
+        type: Sequelize.INTEGER,
+        unique: true,
+        primaryKey: true,
+    },
+    username: { 
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    latitude: { 
+        type: Sequelize.DOUBLE,
+        allowNull: false,
+    },
+    longitude:{ 
+        type:  Sequelize.DOUBLE,
+        allowNull: false,
+    },
+});
 
 client.commands = new Collection();
 
@@ -70,7 +86,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	try {
 		// If a command needs the database, make sure you put in the models parameter inside of the execute function of that command.
-		await command.execute(interaction, models);
+		await command.execute(interaction, Models);
 	} catch (error) {
 		console.error(error);
 		if (interaction.replied || interaction.deferred) {
