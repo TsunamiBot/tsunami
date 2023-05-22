@@ -28,13 +28,13 @@ module.exports = {
 				.setColor(0x0099FF)
 				.setTitle('Current Weather')
 				.setAuthor({ name: 'Powered by WeatherAPI', iconURL: 'https://cdn.weatherapi.com/v4/images/weatherapi_logo.png', url: 'https://www.weatherapi.com' })
-				.setDescription(`${currentWeather.condition.text}.\n\nTo see other weather reports, consider using the "report" command.`)
+				.setDescription(`${currentWeather.condition.text} conditions.\n\nTo see other weather reports, consider using the "report" command.`)
 				.setThumbnail(`https:${currentWeather.condition.icon}`)
 				.addFields({ name: 'Local Time', value: `${standardDateTime} ${location.tz_id}` })
 				.addFields(
 					{ name: 'Location', value: `${location.name}, ${location.region}, ${location.country}` },
 					{ name: 'Temperature', value: `${currentWeather.temp_f} °F`, inline: true },
-					{ name: 'Winds', value: `${currentWeather.wind_mph} mph`, inline: true },
+					{ name: 'Wind Speed', value: `${currentWeather.wind_mph} mph`, inline: true },
 					{ name: 'Precipitation', value: `${currentWeather.precip_in} in.`, inline: true },
 				)
 				.setTimestamp()
