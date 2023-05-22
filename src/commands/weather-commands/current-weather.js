@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { weatherAPIKey } = require('../../config.json');
+const { convertToStandardDateTime } = require('../../utilities/timeUtil.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -21,13 +22,15 @@ module.exports = {
 			const data = await response.json();
 			const currentWeather = data.current;
 			const location = data.location;
+			const standardDateTime = convertToStandardDateTime(location.localtime);
 
 			const embed = new EmbedBuilder()
 				.setColor(0x0099FF)
 				.setTitle('Current Weather')
 				.setAuthor({ name: 'Powered by WeatherAPI', iconURL: 'https://cdn.weatherapi.com/v4/images/weatherapi_logo.png', url: 'https://www.weatherapi.com' })
-				.setDescription(`${currentWeather.condition.text}.\n\n To see other weather reports, consider using the "report" command.`)
+				.setDescription(`${currentWeather.condition.text}.\n\nTo see other weather reports, consider using the "report" command.`)
 				.setThumbnail(`https:${currentWeather.condition.icon}`)
+				.addFields({ name: 'Local Time', value: `${standardDateTime} ${location.tz_id}` })
 				.addFields(
 					{ name: 'Location', value: `${location.name}, ${location.region}, ${location.country}` },
 					{ name: 'Temperature', value: `${currentWeather.temp_f} °F`, inline: true },
