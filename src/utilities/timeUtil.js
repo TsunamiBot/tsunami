@@ -4,6 +4,16 @@ const convertToStandardDateTime = (militaryTime) => {
 	return localDate.toLocaleString([], options);
 }
 
+const convertToStandardTime = (militaryTime) => {
+    const [date, time] = militaryTime.split(' ');
+    const [hours, minutes] = time.split(':');
+    const standardHours = hours % 12 || 12;
+    const period = hours < 12 ? 'AM' : 'PM';
+    const formattedTime = `${standardHours}:${minutes} ${period}`;
+    return formattedTime;
+}
+
 module.exports = {
     convertToStandardDateTime,
+    convertToStandardTime,
 };
